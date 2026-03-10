@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Database (if you don't want to share it)
+# axiom.db
+
+# Environment variables
+.env
+
+# Logs
+npm-debug.log*

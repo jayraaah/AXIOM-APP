@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIOM - Wikipedia of Math</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 4em;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-section {
+            margin-bottom: 30px;
+        }
+
+        .feature-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            color: #555;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .category-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 8px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .category-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .right-panel {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .search-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .search-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .pattern-badge {
+            background: #667eea20;
+            color: #667eea;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8em;
+            font-weight: normal;
+            border: 1px solid #667eea;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+        }
+
+        .search-box button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .search-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
+        }
+
+        .keyboard {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .key {
+            width: 50px;
+            height: 50px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.3em;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .key:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+            border-color: #667eea;
+        }
+
+        .key.wide {
+            width: auto;
+            padding: 0 20px;
+            background: #ff6b6b;
+            color: white;
+            border-color: #ff6b6b;
+        }
+
+        .key.wide:hover {
+            background: #ff5252;
+        }
+
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .example {
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #ddd;
+            font-family: 'Courier New', monospace;
+        }
+
+        .example:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .results-area {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 400px;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .result-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .result-value {
+            font-size: 2.5em;
+            color: #667eea;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        .working-btn {
+            background: none;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .working-btn:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .steps-container {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .steps-container.show {
+            display: block;
+        }
+
+        .step-item {
+            padding: 12px;
+            background: white;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+
+        .footer {
+            background: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .footer strong {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1>AXIOM</h1>
+            <p>Content-Based Mathematical Formula Search Engine</p>
+            <div class="stats-row">
+                <div class="stat-item"><span class="stat-number">900</span><span class="stat-label">LOGARITHMS</span></div>
+                <div class="stat-item"><span class="stat-number">181</span><span class="stat-label">TRIGONOMETRY</span></div>
+                <div class="stat-item"><span class="stat-number">1000</span><span class="stat-label">SQUARE ROOTS</span></div>
+                <div class="stat-item"><span class="stat-number">1000</span><span class="stat-label">RECIPROCALS</span></div>
+                <div class="stat-item"><span class="stat-number">6</span><span class="stat-label">CONSTANTS</span></div>
+                <div class="stat-item"><span class="stat-number">55+</span><span class="stat-label">FORMULAS</span></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="feature-section">
+                    <h3>What Makes AXIOM Special</h3>
+                    <ul class="feature-list">
+                        <li>Pattern Recognition - understands math structure</li>
+                        <li>Cosine Similarity - finds related formulas</li>
+                        <li>Step-by-Step Working Solutions</li>
+                        <li>Complete Math Keyboard (∫, ∑, √, π)</li>
+                        <li>7 Categories: Algebra, Calculus, Trig, etc.</li>
+                        <li>Educational - shows HOW, not just answer</li>
+                    </ul>
+                </div>
+
+                <div class="category-section">
+                    <h3>Formula Categories</h3>
+                    <div class="category-grid">
+                        <button class="category-btn" onclick="searchCategory('algebra')">📐 Algebra</button>
+                        <button class="category-btn" onclick="searchCategory('geometry')">📏 Geometry</button>
+                        <button class="category-btn" onclick="searchCategory('trigonometry')">📐 Trigonometry</button>
+                        <button class="category-btn" onclick="searchCategory('calculus')">∫ Calculus</button>
+                        <button class="category-btn" onclick="searchCategory('statistics')">📊 Statistics</button>
+                        <button class="category-btn" onclick="searchCategory('physics')">⚡ Physics</button>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 10px;">
+                    <p><strong>Joy Auma .O & Janet Ngao</strong><br>Form 4 | Bahari Girls</p>
+                    <p><small>Teacher: Madam Maryam</small></p>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="search-section">
+                    <h3>
+                        SEARCH 3,142+ MATHEMATICAL ENTRIES
+                        <span class="pattern-badge">Pattern Recognition Active</span>
+                    </h3>
+                    <p style="color: #666; margin-bottom: 10px;">Try: ∫x²dx, quadratic formula, sin 30°, F=ma, log 5, √25</p>
+                    
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Type any math expression...">
+                        <button onclick="performSearch()">SEARCH</button>
+                    </div>
+
+                    <div class="keyboard">
+                        <button class="key" onclick="addSymbol('∫')">∫</button>
+                        <button class="key" onclick="addSymbol('∑')">∑</button>
+                        <button class="key" onclick="addSymbol('√')">√</button>
+                        <button class="key" onclick="addSymbol('π')">π</button>
+                        <button class="key" onclick="addSymbol('θ')">θ</button>
+                        <button class="key" onclick="addSymbol('²')">x²</button>
+                        <button class="key" onclick="addSymbol('³')">x³</button>
+                        <button class="key" onclick="addSymbol('∞')">∞</button>
+                        <button class="key" onclick="addSymbol('≈')">≈</button>
+                        <button class="key" onclick="addSymbol('≠')">≠</button>
+                        <button class="key" onclick="addSymbol('±')">±</button>
+                        <button class="key" onclick="addSymbol('α')">α</button>
+                        <button class="key" onclick="addSymbol('β')">β</button>
+                        <button class="key" onclick="addSymbol('γ')">γ</button>
+                        <button class="key wide" onclick="clearInput()">CLEAR</button>
+                    </div>
+
+                    <div class="examples">
+                        <span class="example" onclick="useExample('∫x²dx')">∫x²dx</span>
+                        <span class="example" onclick="useExample('quadratic formula')">quadratic formula</span>
+                        <span class="example" onclick="useExample('sin 30°')">sin 30°</span>
+                        <span class="example" onclick="useExample('cos 60°')">cos 60°</span>
+                        <span class="example" onclick="useExample('log 5')">log 5</span>
+                        <span class="example" onclick="useExample('log 6')">log 6</span>
+                        <span class="example" onclick="useExample('√25')">√25</span>
+                        <span class="example" onclick="useExample('√2')">√2</span>
+                        <span class="example" onclick="useExample('1/4')">1/4</span>
+                        <span class="example" onclick="useExample('π')">π</span>
+                        <span class="example" onclick="useExample('e')">e</span>
+                        <span class="example" onclick="useExample('F=ma')">F=ma</span>
+                        <span class="example" onclick="useExample('E=mc²')">E=mc²</span>
+                        <span class="example" onclick="useExample('a²+b²=c²')">a²+b²=c²</span>
+                        <span class="example" onclick="useExample('A=πr²')">A=πr²</span>
+                        <span class="example" onclick="useExample('∑n²')">∑n²</span>
+                    </div>
+                </div>
+
+                <div class="results-area" id="results">
+                    <div style="text-align: center; padding: 60px 20px; color: #999;">
+                        <div style="font-size: 4em; margin-bottom: 20px;">🔍</div>
+                        <h3>Welcome to the Wikipedia of Math</h3>
+                        <p>Search any formula, log, trig value, or constant above</p>
+                        <p style="margin-top: 20px; font-size: 0.9em;">3,142+ mathematical entries available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <strong>Joy Auma .O & Janet Ngao</strong> | Form 4 | Bahari Girls High School<br>
+            <small>Teacher Advisor: Madam Maryam | Science Fair 2026</small>
+        </div>
+    </div>
+
+    <script>
+        function addSymbol(s) {
+            document.getElementById('searchInput').value += s;
+        }
+
+        function clearInput() {
+            document.getElementById('searchInput').value = '';
+        }
+
+        function useExample(ex) {
+            document.getElementById('searchInput').value = ex;
+            performSearch();
+        }
+
+        function searchCategory(cat) {
+            document.getElementById('searchInput').value = cat;
+            performSearch();
+        }
+
+        async function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            if (!query) return;
+
+            document.getElementById('results').innerHTML = '<div style="text-align: center; padding: 40px;">Searching 3,142+ entries...</div>';
+
+            try {
+                // LOGARITHM SEARCH
+                if (query.toLowerCase().startsWith('log')) {
+                    const num = parseFloat(query.replace('log', '').replace('°', '').trim());
+                    const res = await fetch(`/api/log/${num}`);
+                    const data = await res.json();
+                    document.getElementById('results').innerHTML = `
+                        <div class="result-card">
+                            <div class="result-title">📊 Logarithm</div>
+                            <div class="result-value">log₁₀(${num}) = ${data.log10}</div>
+                            ${data.closest ? `<p style="color: #666;">Closest value: log₁₀(${data.number}) = ${data.log10}</p>` : ''}
+                        </div>
+                    `;
+                    return;
+                }
+
+                // TRIGONOMETRY SEARCH
+                if (query.includes('sin') || query.includes('cos') || query.includes('tan')) {
+                    let func = query.includes('sin') ? 'sin' : query.includes('cos') ? 'cos' : 'tan';
+                    const num = parseFloat(query.replace(func, '').replace('°', '').trim());
+                    const res = await fetch(`/api/trig/${num}`);
+                    const data = await res.json();
+                    document.getElementById('results').innerHTML = `
+                        <div class="result-card">
+                            <div class="result-title">📐 Trigonometry</div>
+                            <div class="result-value">${func}(${num}°) = ${data[func]}</div>
+                            <p>cos(${num}°) = ${data.cos}</p>
+                            <p>tan(${num}°) = ${data.tan || 'undefined'}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // SQUARE ROOT SEARCH
+                if (query.includes('√') || query.toLowerCase().includes('sqrt')) {
+                    const num = parseFloat(query.replace('√', '').replace('sqrt', '').trim());
+                    const res = await fetch(`/api/sqrt/${num}`);
+                    const data = await res.json();
+                    document.getElementById('results').innerHTML = `
+                        <div class="result-card">
+                            <div class="result-title">√ Square Root</div>
+                            <div class="result-value">√${num} = ${data.sqrt}</div>
+                            <p>Square: ${data.square}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // RECIPROCAL SEARCH
+                if (query.includes('1/')) {
+                    const num = parseFloat(query.replace('1/', '').trim());
+                    const res = await fetch(`/api/reciprocal/${num}`);
+                    const data = await res.json();
+                    document.getElementById('results').innerHTML = `
+                        <div class="result-card">
+                            <div class="result-title">🔄 Reciprocal</div>
+                            <div class="result-value">1/${num} = ${data.reciprocal}</div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // CONSTANTS SEARCH
+                if (query === 'π' || query === 'pi') {
+                    const res = await fetch('/api/constant/pi');
+                    const data = await res.json();
+                    document.getElementById('results').innerHTML = `
+                        <div class="result-card">
+                            <div class="result-title">⚡ Constant π</div>
+                            <div class="result-value">π = ${data.value}</div>
+                            <p>${data.description}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                if (query === 'e') {
+                    const res = await fetch('/api/constant/e');
+                    const data = await res.json();
+                    document.getElementById('results').innerHTML = `
+                        <div class="result-card">
+                            <div class="result-title">⚡ Constant e</div>
+                            <div class="result-value">e = ${data.value}</div>
+                            <p>${data.description}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // GENERAL FORMULA SEARCH
+                const res = await fetch('/api/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query })
+                });
+
+                const data = await res.json();
+
+                if (data.results.length === 0) {
+                    document.getElementById('results').innerHTML = '<div style="text-align: center; padding: 40px;">No results found. Try something else!</div>';
+                    return;
+                }
+
+                let html = '';
+                data.results.forEach(item => {
+                    if (item.type === 'formula') {
+                        html += `
+                            <div class="result-card">
+                                <div class="result-title">📚 Formula</div>
+                                <div style="font-size: 1.5em; margin: 15px 0;">${item.formula}</div>
+                                <p><strong>Category:</strong> ${item.category}</p>
+                                <button class="working-btn" onclick="showSteps(${item.id}, this)">Show Working Solutions</button>
+                                <div id="steps-${item.id}" class="steps-container"></div>
+                            </div>
+                        `;
+                    }
+                });
+
+                document.getElementById('results').innerHTML = html;
+
+            } catch (error) {
+                document.getElementById('results').innerHTML = `<div style="text-align: center; padding: 40px; color: red;">Error: ${error.message}</div>`;
+            }
+        }
+
+        async function showSteps(id, button) {
+            const stepsDiv = document.getElementById(`steps-${id}`);
+
+            if (stepsDiv.classList.contains('show')) {
+                stepsDiv.classList.remove('show');
+                button.textContent = 'Show Working Solutions';
+                return;
+            }
+
+            stepsDiv.innerHTML = '<p>Loading steps...</p>';
+            stepsDiv.classList.add('show');
+            button.textContent = 'Loading...';
+
+            try {
+                const res = await fetch(`/api/formula/${id}`);
+                const formula = await res.json();
+
+                let steps = formula.steps;
+                if (typeof steps === 'string') {
+                    try {
+                        steps = JSON.parse(steps);
+                    } catch (e) {
+                        steps = [steps];
+                    }
+                }
+
+                let stepsHtml = '';
+                if (Array.isArray(steps)) {
+                    steps.forEach((step, index) => {
+                        stepsHtml += `
+                            <div class="step-item">
+                                <span class="step-number">${index + 1}</span>
+                                ${step}
+                            </div>
+                        `;
+                    });
+                }
+
+                stepsDiv.innerHTML = stepsHtml;
+                button.textContent = 'Hide Working Solutions';
+
+            } catch (e) {
+                stepsDiv.innerHTML = '<p style="color: red;">Error loading steps</p>';
+                button.textContent = 'Retry';
+            }
+        }
+    </script>
+</body>
+</html>
