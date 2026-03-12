@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXIOM - Wikipedia of Math</title>
+    <title>AXIOM - Math That Makes Sense</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #9f7aea 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -22,85 +22,170 @@
             max-width: 1400px;
             margin: 0 auto;
             background: white;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-radius: 40px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* HEADER - Blue to Purple Gradient */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #9f7aea 100%);
+            padding: 40px;
+            color: white;
+            position: relative;
             overflow: hidden;
         }
 
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 30px;
+        .header::before {
+            content: "∫∑√∞π∏∂∇∑∫√∞π";
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            font-size: 150px;
+            opacity: 0.1;
             color: white;
-            text-align: center;
+            transform: rotate(15deg);
+            font-weight: bold;
+            white-space: nowrap;
+            pointer-events: none;
         }
 
-        .header h1 {
-            font-size: 4em;
-            font-weight: 800;
-            margin-bottom: 5px;
-            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, #ffd700, #ff6b6b, #4ecdc4, #667eea, #9f7aea);
         }
 
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-            margin-bottom: 30px;
-        }
-
-        .stats-row {
+        .header-top {
             display: flex;
             justify-content: space-between;
-            background: rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            margin-top: 20px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
-        .stat-item {
+        .logo h1 {
+            font-size: 5em;
+            font-weight: 900;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 3px;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            opacity: 0.95;
+            font-style: italic;
+            margin-top: 5px;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .team-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px 35px;
+            border-radius: 60px;
+            border: 2px solid rgba(255,255,255,0.3);
             text-align: center;
-            flex: 1;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
+        .team-badge strong {
+            font-size: 1.4em;
             display: block;
             color: #ffd700;
         }
 
-        .stat-label {
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .team-badge span {
+            font-size: 1em;
             opacity: 0.9;
         }
 
-        .main-content {
+        /* STATS BANNER */
+        .stats-banner {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+            background: rgba(255,255,255,0.1);
             padding: 20px;
-            background: #f8f9fa;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .sidebar {
-            background: white;
+        .stat-card {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
             border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: #ffd700;
+            display: block;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 20px;
+            padding: 25px;
+            background: #f8faff;
+        }
+
+        /* LEFT SIDEBAR - Blue to Purple */
+        .sidebar {
+            background: linear-gradient(135deg, #f8faff 0%, #f0f3ff 100%);
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
 
         .feature-section {
-            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
         }
 
-        .feature-section h3 {
-            color: #333;
+        .feature-title {
+            font-size: 1.3em;
+            color: #2d3748;
             margin-bottom: 15px;
-            font-size: 1.2em;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-title span {
+            font-size: 1.5em;
         }
 
         .feature-list {
@@ -109,251 +194,364 @@
 
         .feature-list li {
             padding: 10px 0;
-            color: #555;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: #4a5568;
         }
 
         .feature-list li:last-child {
             border-bottom: none;
         }
 
-        .feature-list li::before {
-            content: "✓";
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        .category-section h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 8px;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .category-btn {
-            background: #f0f0f0;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.95em;
-            transition: all 0.3s;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .category-btn:hover {
-            background: #667eea;
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .right-panel {
+        .database-stats {
             background: white;
             border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+            border: 2px solid #667eea30;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #667eea50;
+        }
+
+        .stat-name {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .total-row {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 3px solid #667eea;
+            font-size: 1.2em;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            color: #2d3748;
+        }
+
+        .category-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            border: 2px solid #667eea50;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .category-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: transparent;
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* RIGHT PANEL */
+        .right-panel {
+            background: white;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
         }
 
         .search-section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f7fafc, #ffffff);
+            border-radius: 30px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
         }
 
-        .search-section h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.3em;
+        .search-title {
+            font-size: 1.5em;
+            color: #2d3748;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
-            flex-wrap: wrap;
         }
 
-        .pattern-badge {
-            background: #667eea20;
-            color: #667eea;
+        .search-title span {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
             padding: 5px 15px;
             border-radius: 30px;
             font-size: 0.8em;
-            font-weight: normal;
-            border: 1px solid #667eea;
         }
 
-        .search-box {
+        .search-wrapper {
             display: flex;
-            gap: 10px;
-            margin: 20px 0;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        .search-box input {
+        .search-input {
             flex: 1;
-            padding: 15px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1em;
+            padding: 20px 25px;
+            font-size: 1.2em;
+            border: 3px solid #e2e8f0;
+            border-radius: 50px;
             outline: none;
             transition: all 0.3s;
+            font-family: 'Courier New', monospace;
         }
 
-        .search-box input:focus {
+        .search-input:focus {
             border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+            box-shadow: 0 0 0 5px rgba(102, 126, 234, 0.2);
         }
 
-        .search-box button {
-            padding: 15px 40px;
+        .search-btn {
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
+            padding: 0 45px;
+            border-radius: 50px;
+            font-size: 1.3em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
 
-        .search-box button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.6);
         }
 
-        .keyboard {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 20px 0;
+        /* SUPER COMPACT KEYBOARD */
+        .keyboard-section {
+            background: linear-gradient(135deg, #f7fafc, #ffffff);
+            border-radius: 25px;
             padding: 20px;
-            background: white;
-            border-radius: 15px;
-            border: 2px solid #e0e0e0;
+            margin: 20px 0;
+            border: 2px solid #667eea50;
+        }
+
+        .keyboard-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #4a5568;
+            font-weight: 600;
+        }
+
+        .keyboard-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
         }
 
         .key {
-            width: 50px;
-            height: 50px;
-            background: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 12px 0;
             font-size: 1.3em;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
+            color: #2d3748;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
         }
 
         .key:hover {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            transform: scale(1.1);
-            border-color: #667eea;
+            transform: scale(1.05);
+            border-color: transparent;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
         }
 
         .key.wide {
-            width: auto;
-            padding: 0 20px;
-            background: #ff6b6b;
-            color: white;
-            border-color: #ff6b6b;
+            grid-column: span 2;
         }
 
-        .key.wide:hover {
-            background: #ff5252;
+        .key.special {
+            background: linear-gradient(135deg, #f6ad55, #ed8936);
+            color: white;
+            border-color: transparent;
+        }
+
+        .key.purple {
+            background: linear-gradient(135deg, #9f7aea, #764ba2);
+            color: white;
+            border-color: transparent;
+        }
+
+        .key.blue {
+            background: linear-gradient(135deg, #667eea, #5a67d8);
+            color: white;
+            border-color: transparent;
+        }
+
+        .helper-text {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f4fa;
+            border-radius: 15px;
+            font-size: 1em;
+            color: #4a5568;
+            border-left: 5px solid #667eea;
+        }
+
+        .helper-text code {
+            background: white;
+            padding: 3px 8px;
+            border-radius: 8px;
+            color: #667eea;
+            font-weight: bold;
         }
 
         .examples {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .example {
-            background: #f0f0f0;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.95em;
+            background: #edf2f7;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 1em;
             cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid #ddd;
+            transition: all 0.3s;
+            border: 2px solid transparent;
             font-family: 'Courier New', monospace;
         }
 
         .example:hover {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            border-color: #667eea;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
 
         .results-area {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
             min-height: 400px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #f7fafc, #ffffff);
+            border-radius: 50px;
+            border: 2px solid #667eea30;
+        }
+
+        .match-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .query-badge {
+            background: #edf2f7;
+            padding: 8px 25px;
+            border-radius: 30px;
+            color: #4a5568;
+            font-family: 'Courier New', monospace;
         }
 
         .result-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
+            background: linear-gradient(135deg, #ffffff, #f7fafc);
+            border-radius: 20px;
+            padding: 25px;
             margin-bottom: 15px;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-left: 8px solid #667eea;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
         }
 
-        .result-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
+        .result-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
         }
 
-        .result-value {
-            font-size: 2.5em;
-            color: #667eea;
-            margin: 15px 0;
+        .formula-display {
+            font-size: 2em;
+            font-family: 'Courier New', monospace;
             font-weight: bold;
+            color: #2d3748;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 10px 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .category-tag {
+            display: inline-block;
+            background: #667eea20;
+            color: #4c51bf;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 15px;
         }
 
         .working-btn {
             background: none;
-            border: 2px solid #667eea;
+            border: 3px solid #667eea;
             color: #667eea;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.1em;
             cursor: pointer;
-            font-weight: 600;
             transition: all 0.3s;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .working-btn:hover {
-            background: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            border-color: transparent;
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
 
         .steps-container {
             margin-top: 20px;
             padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
+            background: #f0f4fa;
+            border-radius: 15px;
             display: none;
+            border: 2px dashed #667eea;
         }
 
         .steps-container.show {
@@ -361,280 +559,512 @@
         }
 
         .step-item {
-            padding: 12px;
+            padding: 15px;
             background: white;
-            margin-bottom: 8px;
-            border-radius: 5px;
-            border-left: 3px solid #667eea;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
         }
 
         .step-number {
             display: inline-block;
-            width: 24px;
-            height: 24px;
-            background: #667eea;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border-radius: 50%;
             text-align: center;
-            line-height: 24px;
-            margin-right: 10px;
+            line-height: 28px;
+            margin-right: 12px;
             font-size: 0.9em;
+            font-weight: bold;
         }
 
         .footer {
-            background: #333;
+            background: #1a202c;
             color: white;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            font-size: 1em;
+            font-size: 1.1em;
+            border-top: 5px solid linear-gradient(90deg, #667eea, #764ba2, #9f7aea);
         }
 
         .footer strong {
             color: #ffd700;
         }
+
+        .footer a {
+            color: #9f7aea;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="app-container">
+        <!-- HEADER - Blue to Purple Gradient -->
         <div class="header">
-            <h1>AXIOM</h1>
-            <p>Content-Based Mathematical Formula Search Engine</p>
-            <div class="stats-row">
-                <div class="stat-item"><span class="stat-number">900</span><span class="stat-label">LOGARITHMS</span></div>
-                <div class="stat-item"><span class="stat-number">181</span><span class="stat-label">TRIGONOMETRY</span></div>
-                <div class="stat-item"><span class="stat-number">1000</span><span class="stat-label">SQUARE ROOTS</span></div>
-                <div class="stat-item"><span class="stat-number">1000</span><span class="stat-label">RECIPROCALS</span></div>
-                <div class="stat-item"><span class="stat-number">6</span><span class="stat-label">CONSTANTS</span></div>
-                <div class="stat-item"><span class="stat-number">55+</span><span class="stat-label">FORMULAS</span></div>
+            <div class="header-top">
+                <div class="logo">
+                    <h1>AXIOM</h1>
+                    <div class="tagline">Math That Actually Makes Sense</div>
+                </div>
+                <div class="team-badge">
+                    <strong>Joy Auma .O & Janet Ngao</strong>
+                    <span>Form 4 | Bahari Girls High School</span>
+                </div>
+            </div>
+            
+            <!-- STATS BANNER - Updated to 24+ formulas -->
+            <div class="stats-banner" id="statsBanner">
+                <div class="stat-card">
+                    <span class="stat-number" id="logCount">900</span>
+                    <span class="stat-label">Logarithms</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="trigCount">361</span>
+                    <span class="stat-label">Trigonometry</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="rootCount">1000</span>
+                    <span class="stat-label">Square Roots</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="recipCount">1000</span>
+                    <span class="stat-label">Reciprocals</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="constCount">9</span>
+                    <span class="stat-label">Constants</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="formulaCount">24+</span>
+                    <span class="stat-label">Formulas</span>
+                </div>
             </div>
         </div>
 
+        <!-- MAIN CONTENT -->
         <div class="main-content">
+            <!-- LEFT SIDEBAR -->
             <div class="sidebar">
+                <!-- What Makes AXIOM Special -->
                 <div class="feature-section">
-                    <h3>What Makes AXIOM Special</h3>
+                    <div class="feature-title">
+                        <span>✨</span> What Makes AXIOM Special
+                    </div>
                     <ul class="feature-list">
-                        <li>Pattern Recognition - understands math structure</li>
-                        <li>Cosine Similarity - finds related formulas</li>
-                        <li>Step-by-Step Working Solutions</li>
-                        <li>Complete Math Keyboard (∫, ∑, √, π)</li>
-                        <li>7 Categories: Algebra, Calculus, Trig, etc.</li>
-                        <li>Educational - shows HOW, not just answer</li>
+                        <li><span>🔍</span> Pattern Recognition - understands math structure</li>
+                        <li><span>📊</span> Cosine Similarity - finds related formulas</li>
+                        <li><span>📚</span> Step-by-Step Working Solutions (24+ formulas)</li>
+                        <li><span>⌨️</span> Super Compact Math Keyboard</li>
+                        <li><span>📐</span> 6 Categories: Algebra, Geometry, Trig, etc.</li>
+                        <li><span>🎓</span> Educational - shows HOW, not just WHAT</li>
                     </ul>
                 </div>
 
-                <div class="category-section">
-                    <h3>Formula Categories</h3>
-                    <div class="category-grid">
-                        <button class="category-btn" onclick="searchCategory('algebra')">📐 Algebra</button>
-                        <button class="category-btn" onclick="searchCategory('geometry')">📏 Geometry</button>
-                        <button class="category-btn" onclick="searchCategory('trigonometry')">📐 Trigonometry</button>
-                        <button class="category-btn" onclick="searchCategory('calculus')">∫ Calculus</button>
-                        <button class="category-btn" onclick="searchCategory('statistics')">📊 Statistics</button>
-                        <button class="category-btn" onclick="searchCategory('physics')">⚡ Physics</button>
+                <!-- Database Stats - Updated -->
+                <div class="database-stats">
+                    <div class="feature-title">
+                        <span>📊</span> Our Database
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Logarithms</span>
+                        <span class="stat-value">900</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Trigonometry</span>
+                        <span class="stat-value">361</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Square Roots</span>
+                        <span class="stat-value">1000</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Reciprocals</span>
+                        <span class="stat-value">1000</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Constants</span>
+                        <span class="stat-value">9</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-name">Formulas with Steps</span>
+                        <span class="stat-value">24+</span>
+                    </div>
+                    <div class="total-row">
+                        <span>TOTAL ENTRIES</span>
+                        <span style="color: #667eea;">3,294+</span>
                     </div>
                 </div>
 
-                <div style="margin-top: 20px; padding: 15px; background: #f0f0f0; border-radius: 10px;">
-                    <p><strong>Joy Auma .O & Janet Ngao</strong><br>Form 4 | Bahari Girls</p>
-                    <p><small>Teacher: Madam Maryam</small></p>
+                <!-- Quick Categories -->
+                <div class="feature-section">
+                    <div class="feature-title">
+                        <span>📚</span> Quick Access
+                    </div>
+                    <button class="category-btn" onclick="searchCategory('algebra')">
+                        <span>✖️</span> Algebra
+                    </button>
+                    <button class="category-btn" onclick="searchCategory('geometry')">
+                        <span>📏</span> Geometry
+                    </button>
+                    <button class="category-btn" onclick="searchCategory('trigonometry')">
+                        <span>📐</span> Trigonometry
+                    </button>
+                    <button class="category-btn" onclick="searchCategory('calculus')">
+                        <span>∫</span> Calculus
+                    </button>
+                    <button class="category-btn" onclick="searchCategory('statistics')">
+                        <span>📊</span> Statistics
+                    </button>
+                    <button class="category-btn" onclick="searchCategory('physics')">
+                        <span>⚡</span> Physics
+                    </button>
                 </div>
             </div>
 
+            <!-- RIGHT PANEL -->
             <div class="right-panel">
+                <!-- SEARCH SECTION -->
                 <div class="search-section">
-                    <h3>
-                        SEARCH 3,142+ MATHEMATICAL ENTRIES
-                        <span class="pattern-badge">Pattern Recognition Active</span>
-                    </h3>
-                    <p style="color: #666; margin-bottom: 10px;">Try: ∫x²dx, quadratic formula, sin 30°, F=ma, log 5, √25</p>
+                    <div class="search-title">
+                        <span>🔍</span> SEARCH 3,294+ ENTRIES
+                        <span>Pattern Recognition Active</span>
+                    </div>
                     
-                    <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Type any math expression...">
-                        <button onclick="performSearch()">SEARCH</button>
+                    <div class="search-wrapper">
+                        <input type="text" class="search-input" id="searchInput" 
+                            placeholder="Try: log 5, sin 30°, √25, quadratic formula, F=ma...">
+                        <button class="search-btn" onclick="performSearch()">SEARCH</button>
                     </div>
 
-                    <div class="keyboard">
-                        <button class="key" onclick="addSymbol('∫')">∫</button>
-                        <button class="key" onclick="addSymbol('∑')">∑</button>
-                        <button class="key" onclick="addSymbol('√')">√</button>
-                        <button class="key" onclick="addSymbol('π')">π</button>
-                        <button class="key" onclick="addSymbol('θ')">θ</button>
-                        <button class="key" onclick="addSymbol('²')">x²</button>
-                        <button class="key" onclick="addSymbol('³')">x³</button>
-                        <button class="key" onclick="addSymbol('∞')">∞</button>
-                        <button class="key" onclick="addSymbol('≈')">≈</button>
-                        <button class="key" onclick="addSymbol('≠')">≠</button>
-                        <button class="key" onclick="addSymbol('±')">±</button>
-                        <button class="key" onclick="addSymbol('α')">α</button>
-                        <button class="key" onclick="addSymbol('β')">β</button>
-                        <button class="key" onclick="addSymbol('γ')">γ</button>
-                        <button class="key wide" onclick="clearInput()">CLEAR</button>
+                    <!-- SUPER COMPACT KEYBOARD -->
+                    <div class="keyboard-section">
+                        <div class="keyboard-title">
+                            <span>⌨️</span> SUPER COMPACT KEYBOARD - Click to Insert
+                        </div>
+                        
+                        <!-- Row 1: Numbers & Basics -->
+                        <div class="keyboard-grid">
+                            <button class="key" onclick="insertSymbol('7')">7</button>
+                            <button class="key" onclick="insertSymbol('8')">8</button>
+                            <button class="key" onclick="insertSymbol('9')">9</button>
+                            <button class="key" onclick="insertSymbol('+')">+</button>
+                            <button class="key" onclick="insertSymbol('-')">-</button>
+                            <button class="key" onclick="insertSymbol('×')">×</button>
+                            <button class="key" onclick="insertSymbol('÷')">÷</button>
+                            <button class="key" onclick="insertSymbol('=')">=</button>
+                            
+                            <!-- Row 2 -->
+                            <button class="key" onclick="insertSymbol('4')">4</button>
+                            <button class="key" onclick="insertSymbol('5')">5</button>
+                            <button class="key" onclick="insertSymbol('6')">6</button>
+                            <button class="key" onclick="insertSymbol('(')">(</button>
+                            <button class="key" onclick="insertSymbol(')')">)</button>
+                            <button class="key" onclick="insertSymbol('[')">[</button>
+                            <button class="key" onclick="insertSymbol(']')">]</button>
+                            <button class="key" onclick="insertSymbol('.')">.</button>
+                            
+                            <!-- Row 3 -->
+                            <button class="key" onclick="insertSymbol('1')">1</button>
+                            <button class="key" onclick="insertSymbol('2')">2</button>
+                            <button class="key" onclick="insertSymbol('3')">3</button>
+                            <button class="key" onclick="insertSymbol('A')">A</button>
+                            <button class="key" onclick="insertSymbol('B')">B</button>
+                            <button class="key" onclick="insertSymbol('C')">C</button>
+                            <button class="key" onclick="insertSymbol('a')">a</button>
+                            <button class="key" onclick="insertSymbol('b')">b</button>
+                            
+                            <!-- Row 4: Functions -->
+                            <button class="key" onclick="insertSymbol('0')">0</button>
+                            <button class="key" onclick="insertSymbol('.')">.</button>
+                            <button class="key" onclick="insertSymbol(',')">,</button>
+                            <button class="key blue" onclick="insertSymbol('sin(')">sin</button>
+                            <button class="key blue" onclick="insertSymbol('cos(')">cos</button>
+                            <button class="key blue" onclick="insertSymbol('tan(')">tan</button>
+                            <button class="key blue" onclick="insertSymbol('log(')">log</button>
+                            <button class="key blue" onclick="insertSymbol('ln(')">ln</button>
+                            
+                            <!-- Row 5: Powers -->
+                            <button class="key purple" onclick="insertSymbol('²')">x²</button>
+                            <button class="key purple" onclick="insertSymbol('³')">x³</button>
+                            <button class="key purple" onclick="insertSymbol('^')">xⁿ</button>
+                            <button class="key purple" onclick="insertSymbol('_0')">x₀</button>
+                            <button class="key purple" onclick="insertSymbol('_1')">x₁</button>
+                            <button class="key purple" onclick="insertSymbol('_2')">x₂</button>
+                            <button class="key purple" onclick="insertSymbol('_n')">xₙ</button>
+                            <button class="key purple" onclick="insertSymbol('√(')">√</button>
+                            
+                            <!-- Row 6: Greek & Symbols -->
+                            <button class="key" onclick="insertSymbol('α')">α</button>
+                            <button class="key" onclick="insertSymbol('β')">β</button>
+                            <button class="key" onclick="insertSymbol('γ')">γ</button>
+                            <button class="key" onclick="insertSymbol('π')">π</button>
+                            <button class="key" onclick="insertSymbol('θ')">θ</button>
+                            <button class="key" onclick="insertSymbol('∫')">∫</button>
+                            <button class="key" onclick="insertSymbol('∑')">∑</button>
+                            <button class="key" onclick="insertSymbol('∞')">∞</button>
+                            
+                            <!-- Row 7: More Symbols & Clear -->
+                            <button class="key" onclick="insertSymbol('≈')">≈</button>
+                            <button class="key" onclick="insertSymbol('≠')">≠</button>
+                            <button class="key" onclick="insertSymbol('≤')">≤</button>
+                            <button class="key" onclick="insertSymbol('≥')">≥</button>
+                            <button class="key" onclick="insertSymbol('°')">°</button>
+                            <button class="key" onclick="insertSymbol('e')">e</button>
+                            <button class="key" onclick="insertSymbol('^')">^</button>
+                            <button class="key special" onclick="clearInput()">CLR</button>
+                        </div>
+
+                        <!-- Helper Text for Subscripts -->
+                        <div class="helper-text">
+                            <strong>📝 How to type "4 base 5":</strong> Click <code>4</code> → Click <code>xₙ</code> → Click <code>5</code> = <strong>4₅</strong><br>
+                            <strong>📝 How to type "log base 2 of 8":</strong> Click <code>log</code> → Click <code>xₙ</code> → Click <code>2</code> → Click <code>8</code> = <strong>log₂8</strong>
+                        </div>
                     </div>
 
+                    <!-- Quick Examples -->
                     <div class="examples">
-                        <span class="example" onclick="useExample('∫x²dx')">∫x²dx</span>
-                        <span class="example" onclick="useExample('quadratic formula')">quadratic formula</span>
-                        <span class="example" onclick="useExample('sin 30°')">sin 30°</span>
-                        <span class="example" onclick="useExample('cos 60°')">cos 60°</span>
                         <span class="example" onclick="useExample('log 5')">log 5</span>
                         <span class="example" onclick="useExample('log 6')">log 6</span>
+                        <span class="example" onclick="useExample('sin 30°')">sin 30°</span>
+                        <span class="example" onclick="useExample('cos 60°')">cos 60°</span>
+                        <span class="example" onclick="useExample('tan 45°')">tan 45°</span>
                         <span class="example" onclick="useExample('√25')">√25</span>
                         <span class="example" onclick="useExample('√2')">√2</span>
-                        <span class="example" onclick="useExample('1/4')">1/4</span>
                         <span class="example" onclick="useExample('π')">π</span>
-                        <span class="example" onclick="useExample('e')">e</span>
+                        <span class="example" onclick="useExample('quadratic formula')">quadratic</span>
                         <span class="example" onclick="useExample('F=ma')">F=ma</span>
-                        <span class="example" onclick="useExample('E=mc²')">E=mc²</span>
-                        <span class="example" onclick="useExample('a²+b²=c²')">a²+b²=c²</span>
-                        <span class="example" onclick="useExample('A=πr²')">A=πr²</span>
-                        <span class="example" onclick="useExample('∑n²')">∑n²</span>
+                        <span class="example" onclick="useExample('4_5')">4 base 5</span>
                     </div>
                 </div>
 
-                <div class="results-area" id="results">
-                    <div style="text-align: center; padding: 60px 20px; color: #999;">
-                        <div style="font-size: 4em; margin-bottom: 20px;">🔍</div>
-                        <h3>Welcome to the Wikipedia of Math</h3>
-                        <p>Search any formula, log, trig value, or constant above</p>
-                        <p style="margin-top: 20px; font-size: 0.9em;">3,142+ mathematical entries available</p>
+                <!-- RESULTS AREA -->
+                <div id="resultsArea">
+                    <div class="results-header">
+                        <span class="match-badge" id="matchCount">3,294+ entries</span>
+                        <span class="query-badge" id="currentQuery">Ready to search</span>
+                    </div>
+                    
+                    <div id="resultsContainer" class="results-grid">
+                        <!-- Welcome Screen -->
+                        <div style="text-align: center; padding: 60px 20px;">
+                            <div style="font-size: 4em; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px;">✨</div>
+                            <h2 style="color: #2d3748; margin-bottom: 10px;">Welcome to AXIOM</h2>
+                            <p style="color: #718096; font-size: 1.2em;">By Joy & Janet | Bahari Girls High School</p>
+                            <p style="color: #667eea; margin-top: 20px;">3,294+ mathematical entries • 24+ formulas with steps • Super compact keyboard</p>
+                            <p style="color: #718096; margin-top: 30px;">Try searching: log 5, sin 30°, √25, quadratic formula</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- FOOTER -->
         <div class="footer">
-            <strong>Joy Auma .O & Janet Ngao</strong> | Form 4 | Bahari Girls High School<br>
-            <small>Teacher Advisor: Madam Maryam | Science Fair 2026</small>
+            <div><strong>Joy Auma .O & Janet Ngao</strong> | Form 4 | Bahari Girls High School</div>
+            <div style="margin-top: 10px;">Teacher Advisor: <strong>Madam Maryam</strong> | Science Fair 2026</div>
+            <div style="margin-top: 10px; font-size: 0.9em;">🌐 <a href="https://axiom-app.onrender.com" target="_blank">https://axiom-app.onrender.com</a></div>
+            <div style="margin-top: 15px; color: #9f7aea;">✨ "Math That Actually Makes Sense" ✨</div>
         </div>
     </div>
 
     <script>
-        function addSymbol(s) {
-            document.getElementById('searchInput').value += s;
+        // ========== LOAD STATS ==========
+        fetch('/api/stats')
+            .then(res => res.json())
+            .then(stats => {
+                document.getElementById('logCount').textContent = stats.logs || 900;
+                document.getElementById('trigCount').textContent = stats.trig || 361;
+                document.getElementById('rootCount').textContent = stats.roots || 1000;
+                document.getElementById('recipCount').textContent = stats.recips || 1000;
+                document.getElementById('constCount').textContent = stats.consts || 9;
+                document.getElementById('formulaCount').textContent = (stats.formulas || 24) + '+';
+            })
+            .catch(() => {});
+
+        // ========== KEYBOARD FUNCTIONS ==========
+        function insertSymbol(symbol) {
+            const input = document.getElementById('searchInput');
+            
+            // Handle special subscript syntax
+            if (symbol.startsWith('_')) {
+                // If it's a subscript button (x₀, x₁, etc)
+                input.value += '_' + symbol.substring(1);
+            } else {
+                input.value += symbol;
+            }
+            
+            input.focus();
         }
 
         function clearInput() {
             document.getElementById('searchInput').value = '';
+            document.getElementById('searchInput').focus();
         }
 
-        function useExample(ex) {
-            document.getElementById('searchInput').value = ex;
+        function useExample(example) {
+            document.getElementById('searchInput').value = example;
             performSearch();
         }
 
-        function searchCategory(cat) {
-            document.getElementById('searchInput').value = cat;
+        function searchCategory(category) {
+            document.getElementById('searchInput').value = category;
             performSearch();
         }
 
+        // ========== MAIN SEARCH FUNCTION ==========
         async function performSearch() {
             const query = document.getElementById('searchInput').value;
             if (!query) return;
 
-            document.getElementById('results').innerHTML = '<div style="text-align: center; padding: 40px;">Searching 3,142+ entries...</div>';
+            document.getElementById('currentQuery').textContent = `Query: ${query}`;
+            document.getElementById('resultsContainer').innerHTML = `
+                <div style="text-align: center; padding: 60px;">
+                    <div style="font-size: 2em;">🔍</div>
+                    <p style="margin-top: 20px;">Searching 3,294+ entries...</p>
+                </div>
+            `;
 
             try {
-                // LOGARITHM SEARCH
+                // Handle subscript notation (e.g., "4_5" means 4 base 5)
+                const processedQuery = query.replace(/_(\d+)/g, 'ₓ$1');
+                
+                // LOGARITHM PATTERN
                 if (query.toLowerCase().startsWith('log')) {
-                    const num = parseFloat(query.replace('log', '').replace('°', '').trim());
-                    const res = await fetch(`/api/log/${num}`);
-                    const data = await res.json();
-                    document.getElementById('results').innerHTML = `
-                        <div class="result-card">
-                            <div class="result-title">📊 Logarithm</div>
-                            <div class="result-value">log₁₀(${num}) = ${data.log10}</div>
-                            ${data.closest ? `<p style="color: #666;">Closest value: log₁₀(${data.number}) = ${data.log10}</p>` : ''}
-                        </div>
-                    `;
-                    return;
+                    const num = parseFloat(query.replace('log', '').trim());
+                    if (!isNaN(num)) {
+                        const res = await fetch(`/api/log/${num}`);
+                        const data = await res.json();
+                        
+                        let html = `
+                            <div class="result-card">
+                                <div class="formula-display">log₁₀(${num})</div>
+                                <span class="category-tag">📊 Logarithm</span>
+                                <div style="font-size: 3em; color: #667eea; margin: 20px 0;">${data.log10}</div>
+                        `;
+                        
+                        if (data.closest) {
+                            html += `<p style="color: #718096;">Closest match: log₁₀(${data.number}) = ${data.log10}</p>`;
+                        }
+                        
+                        html += `</div>`;
+                        
+                        document.getElementById('resultsContainer').innerHTML = html;
+                        document.getElementById('matchCount').textContent = '1 result';
+                        return;
+                    }
                 }
-
-                // TRIGONOMETRY SEARCH
+                
+                // TRIGONOMETRY PATTERN
                 if (query.includes('sin') || query.includes('cos') || query.includes('tan')) {
-                    let func = query.includes('sin') ? 'sin' : query.includes('cos') ? 'cos' : 'tan';
-                    const num = parseFloat(query.replace(func, '').replace('°', '').trim());
-                    const res = await fetch(`/api/trig/${num}`);
-                    const data = await res.json();
-                    document.getElementById('results').innerHTML = `
-                        <div class="result-card">
-                            <div class="result-title">📐 Trigonometry</div>
-                            <div class="result-value">${func}(${num}°) = ${data[func]}</div>
-                            <p>cos(${num}°) = ${data.cos}</p>
-                            <p>tan(${num}°) = ${data.tan || 'undefined'}</p>
-                        </div>
-                    `;
-                    return;
+                    const num = parseFloat(query.replace('sin', '').replace('cos', '').replace('tan', '').replace('°', '').trim());
+                    if (!isNaN(num)) {
+                        const res = await fetch(`/api/trig/${num}`);
+                        const data = await res.json();
+                        
+                        let html = `
+                            <div class="result-card">
+                                <div class="formula-display">${query.includes('sin') ? 'sin' : query.includes('cos') ? 'cos' : 'tan'}(${num}°)</div>
+                                <span class="category-tag">📐 Trigonometry</span>
+                                <div style="font-size: 2.5em; color: #667eea; margin: 20px 0;">${data.sin || data.cos || data.tan}</div>
+                                <p>cos(${num}°) = ${data.cos}</p>
+                                <p>tan(${num}°) = ${data.tan || 'undefined'}</p>
+                        `;
+                        
+                        if (data.closest) {
+                            html += `<p style="color: #718096;">Closest angle: ${data.angle}°</p>`;
+                        }
+                        
+                        html += `</div>`;
+                        
+                        document.getElementById('resultsContainer').innerHTML = html;
+                        document.getElementById('matchCount').textContent = '1 result';
+                        return;
+                    }
                 }
-
-                // SQUARE ROOT SEARCH
+                
+                // SQUARE ROOT PATTERN
                 if (query.includes('√') || query.toLowerCase().includes('sqrt')) {
                     const num = parseFloat(query.replace('√', '').replace('sqrt', '').trim());
-                    const res = await fetch(`/api/sqrt/${num}`);
-                    const data = await res.json();
-                    document.getElementById('results').innerHTML = `
-                        <div class="result-card">
-                            <div class="result-title">√ Square Root</div>
-                            <div class="result-value">√${num} = ${data.sqrt}</div>
-                            <p>Square: ${data.square}</p>
-                        </div>
-                    `;
-                    return;
+                    if (!isNaN(num)) {
+                        const res = await fetch(`/api/sqrt/${num}`);
+                        const data = await res.json();
+                        
+                        let html = `
+                            <div class="result-card">
+                                <div class="formula-display">√${num}</div>
+                                <span class="category-tag">√ Square Root</span>
+                                <div style="font-size: 3em; color: #667eea; margin: 20px 0;">${data.sqrt}</div>
+                                <p>Square: ${data.square}</p>
+                            </div>
+                        `;
+                        
+                        document.getElementById('resultsContainer').innerHTML = html;
+                        document.getElementById('matchCount').textContent = '1 result';
+                        return;
+                    }
                 }
-
-                // RECIPROCAL SEARCH
-                if (query.includes('1/')) {
-                    const num = parseFloat(query.replace('1/', '').trim());
-                    const res = await fetch(`/api/reciprocal/${num}`);
-                    const data = await res.json();
-                    document.getElementById('results').innerHTML = `
-                        <div class="result-card">
-                            <div class="result-title">🔄 Reciprocal</div>
-                            <div class="result-value">1/${num} = ${data.reciprocal}</div>
-                        </div>
-                    `;
-                    return;
+                
+                // Handle subscript search (like "4_5" for base)
+                if (query.includes('_')) {
+                    const parts = query.split('_');
+                    if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+                        const base = parts[0];
+                        const exponent = parts[1];
+                        document.getElementById('resultsContainer').innerHTML = `
+                            <div class="result-card">
+                                <div class="formula-display">${base} base ${exponent}</div>
+                                <span class="category-tag">🔢 Number Base</span>
+                                <p style="font-size: 1.5em; margin: 20px 0;">${base}<sub>${exponent}</sub> = ${base} in base ${exponent}</p>
+                                <p>Example: 4₅ means 4 in base 5</p>
+                            </div>
+                        `;
+                        document.getElementById('matchCount').textContent = '1 result';
+                        return;
+                    }
                 }
-
-                // CONSTANTS SEARCH
+                
+                // CONSTANTS PATTERN
                 if (query === 'π' || query === 'pi') {
                     const res = await fetch('/api/constant/pi');
                     const data = await res.json();
-                    document.getElementById('results').innerHTML = `
+                    
+                    document.getElementById('resultsContainer').innerHTML = `
                         <div class="result-card">
-                            <div class="result-title">⚡ Constant π</div>
-                            <div class="result-value">π = ${data.value}</div>
+                            <div class="formula-display">π</div>
+                            <span class="category-tag">⚡ Constant</span>
+                            <div style="font-size: 2.5em; color: #667eea; margin: 20px 0;">${data.value}</div>
                             <p>${data.description}</p>
                         </div>
                     `;
+                    document.getElementById('matchCount').textContent = '1 result';
                     return;
                 }
 
-                if (query === 'e') {
-                    const res = await fetch('/api/constant/e');
-                    const data = await res.json();
-                    document.getElementById('results').innerHTML = `
-                        <div class="result-card">
-                            <div class="result-title">⚡ Constant e</div>
-                            <div class="result-value">e = ${data.value}</div>
-                            <p>${data.description}</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                // GENERAL FORMULA SEARCH
+                // ===== GENERAL SEARCH =====
                 const res = await fetch('/api/search', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ query })
                 });
-
+                
                 const data = await res.json();
-
+                
+                document.getElementById('matchCount').textContent = `${data.results.length} results`;
+                
                 if (data.results.length === 0) {
-                    document.getElementById('results').innerHTML = '<div style="text-align: center; padding: 40px;">No results found. Try something else!</div>';
+                    document.getElementById('resultsContainer').innerHTML = `
+                        <div style="text-align: center; padding: 60px;">
+                            <h3 style="color: #2d3748;">No results found</h3>
+                            <p style="color: #718096; margin-top: 20px;">Try: log 5, sin 30°, √25, quadratic formula, or 4_5 for base</p>
+                        </div>
+                    `;
                     return;
                 }
 
@@ -643,40 +1073,47 @@
                     if (item.type === 'formula') {
                         html += `
                             <div class="result-card">
-                                <div class="result-title">📚 Formula</div>
-                                <div style="font-size: 1.5em; margin: 15px 0;">${item.formula}</div>
-                                <p><strong>Category:</strong> ${item.category}</p>
-                                <button class="working-btn" onclick="showSteps(${item.id}, this)">Show Working Solutions</button>
+                                <div class="formula-display">${item.formula}</div>
+                                <span class="category-tag">📁 ${item.category}</span>
+                                ${item.subcategory ? `<span class="category-tag">📌 ${item.subcategory}</span>` : ''}
+                                <button class="working-btn" onclick="showWorkingSteps(${item.id}, this)">
+                                    <span>📚</span> Show Working Solutions
+                                </button>
                                 <div id="steps-${item.id}" class="steps-container"></div>
                             </div>
                         `;
                     }
                 });
 
-                document.getElementById('results').innerHTML = html;
+                document.getElementById('resultsContainer').innerHTML = html;
 
             } catch (error) {
-                document.getElementById('results').innerHTML = `<div style="text-align: center; padding: 40px; color: red;">Error: ${error.message}</div>`;
+                document.getElementById('resultsContainer').innerHTML = `
+                    <div style="text-align: center; padding: 60px; color: red;">
+                        <p>Error: ${error.message}</p>
+                    </div>
+                `;
             }
         }
 
-        async function showSteps(id, button) {
-            const stepsDiv = document.getElementById(`steps-${id}`);
-
+        // ========== SHOW WORKING STEPS ==========
+        async function showWorkingSteps(formulaId, button) {
+            const stepsDiv = document.getElementById(`steps-${formulaId}`);
+            
             if (stepsDiv.classList.contains('show')) {
                 stepsDiv.classList.remove('show');
-                button.textContent = 'Show Working Solutions';
+                button.innerHTML = '<span>📚</span> Show Working Solutions';
                 return;
             }
-
-            stepsDiv.innerHTML = '<p>Loading steps...</p>';
+            
+            stepsDiv.innerHTML = '<p style="text-align: center;">Loading steps...</p>';
             stepsDiv.classList.add('show');
-            button.textContent = 'Loading...';
-
+            button.innerHTML = '<span>📖</span> Loading...';
+            
             try {
-                const res = await fetch(`/api/formula/${id}`);
+                const res = await fetch(`/api/formula/${formulaId}`);
                 const formula = await res.json();
-
+                
                 let steps = formula.steps;
                 if (typeof steps === 'string') {
                     try {
@@ -685,7 +1122,7 @@
                         steps = [steps];
                     }
                 }
-
+                
                 let stepsHtml = '';
                 if (Array.isArray(steps)) {
                     steps.forEach((step, index) => {
@@ -696,14 +1133,16 @@
                             </div>
                         `;
                     });
+                } else {
+                    stepsHtml += `<div class="step-item">${steps}</div>`;
                 }
-
+                
                 stepsDiv.innerHTML = stepsHtml;
-                button.textContent = 'Hide Working Solutions';
-
+                button.innerHTML = '<span>📖</span> Hide Working Solutions';
+                
             } catch (e) {
                 stepsDiv.innerHTML = '<p style="color: red;">Error loading steps</p>';
-                button.textContent = 'Retry';
+                button.innerHTML = '<span>📚</span> Retry';
             }
         }
     </script>
